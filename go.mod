@@ -1,3 +1,3 @@
-module github.com/cdvelop/embed
+module webtyp.com/embed
 
 go 1.26.8
