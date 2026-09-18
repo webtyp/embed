@@ -1,11 +1,11 @@
 package embed
 
 import (
-	"fmt"
 	"hash/fnv"
 	"math"
 
 	"webtyp.com/context"
+	"webtyp.com/fmt"
 )
 
 // Embedder turns text into vectors. Implementations run entirely in the browser.
@@ -59,7 +59,7 @@ func (m *MockEmbedder) ID() string {
 func (m *MockEmbedder) Embed(ctx *context.Context, texts []string, dst []float32) error {
 	expectedLen := len(texts) * m.dim
 	if len(dst) != expectedLen {
-		return fmt.Errorf("dst length mismatch: expected %d (len(texts)*Dim()), got %d", expectedLen, len(dst))
+		return fmt.Err("embed: dst length mismatch, expected", expectedLen, "got", len(dst))
 	}
 	if len(texts) == 0 {
 		return nil
