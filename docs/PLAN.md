@@ -3,8 +3,9 @@ PLAN: "feat: webtyp/embed — el puerto Embedder, sin adaptador"
 TAG: v0.1.0
 EXECUTOR: unassigned
 REVIEWER: none
-STATUS: running
+STATUS: review
 SESSION: 15823324090021242697
+PR: https://github.com/webtyp/embed/pull/1
 ---
 
 > Parte del esfuerzo de búsqueda semántica nativa en el navegador. Índice maestro:
