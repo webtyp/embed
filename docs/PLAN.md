@@ -3,6 +3,8 @@ PLAN: "feat: embed — StaticEmbedder, el adaptador real para bekko-embedding-v1
 TAG: v0.2.0
 EXECUTOR: jules
 REVIEWER: none
+STATUS: running
+SESSION: 2900341598282710585
 ---
 
 > This plan is dispatched via the CodeJob workflow. See skill: agents-workflow.
