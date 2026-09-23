@@ -83,7 +83,7 @@ comments.
 - Reimplementing tokenization, weight parsing, or the encoder graph "to make this file
   self-contained." All three already exist, verified, in their own repos — this repo
   composes them.
-- Skipping Matryoshka truncation's renormalization step. The first 64 components of a unit
+- Skipping Matryoshka truncation's renormalization step. The first 128 components of a unit
   384-vector do not themselves have unit norm — `Embed` must L2-normalize AFTER truncating,
   every time.
 - Trusting a synthetic/hand-built test fixture for `TestStaticEmbedder_MatchesReference`.
