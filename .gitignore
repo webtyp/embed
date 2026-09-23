@@ -19,3 +19,10 @@ coverage.html
 *.code-workspace
 .vscode
 go.work
+
+# Real model artifacts for TestStaticEmbedder_MatchesReference — 100+ MB, never committed.
+# Generate locally with weightsc against the real hotchpotch/bekko-embedding-v1-a8m files;
+# see docs/PLAN.md Cambio 5. testdata/reference_vectors.json (the small ground-truth vectors)
+# is NOT covered by this and IS committed.
+testdata/*.wtypw
+testdata/*.merges
