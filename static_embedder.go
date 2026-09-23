@@ -10,7 +10,12 @@ import (
 	"webtyp.com/weights"
 )
 
-const truncatedDim = 64 // D0 — Matryoshka, no los 384 nativos
+// truncatedDim is 128, not 384 or 64 — Matryoshka (D0). Verified against the real model
+// card (huggingface.co/hotchpotch/bekko-embedding-v1-a8m, "Truncation and Quantization"):
+// 128 dims loses -7.05% quality ("memory-constrained indexes"), the smallest size the model
+// card does not explicitly discourage for retrieval — 64 dims loses -17.51% and is labeled
+// "not for quality-sensitive retrieval" by the model's own authors.
+const truncatedDim = 128
 
 // Config assembles a StaticEmbedder. Both byte slices are already fetched — this package
 // never imports webtyp.com/fetch or decides where the artifact lives (D5's IndexedDB
@@ -102,7 +107,7 @@ func (e *StaticEmbedder) Embed(ctx *context.Context, texts []string, dst []float
 }
 
 // L2Normalize scales v in place to unit length. A Matryoshka truncation is only a valid
-// embedding AFTER renormalizing — the first 64 components of a unit 384-vector do not
+// embedding AFTER renormalizing — the first 128 components of a unit 384-vector do not
 // themselves have unit norm.
 func L2Normalize(v []float32) {
 	var sumSq float64

@@ -10,7 +10,7 @@ func bekkoA8mConfig() transformer.Config {
 	return transformer.Config{
 		NumLayers:          4,
 		Heads:              6,
-		Dim:                384, // NATIVE — no confundir con los 64 de salida (D0)
+		Dim:                384, // NATIVE — no confundir con los 128 de salida (D0)
 		FFNDim:             1152,
 		GlobalEveryNLayers: 3,
 		LocalWindow:        128,
@@ -18,6 +18,7 @@ func bekkoA8mConfig() transformer.Config {
 		LocalRopeTheta:     160000.0,
 		Eps:                1e-5,
 		Pooling:            transformer.PoolingMean,
+		Activation:         transformer.ActivationGELU, // config.json: "hidden_activation": "gelu"
 	}
 }
 
