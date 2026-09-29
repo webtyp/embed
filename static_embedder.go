@@ -68,6 +68,11 @@ func (e *StaticEmbedder) Dim() int { return truncatedDim }
 
 func (e *StaticEmbedder) ID() string { return e.id }
 
+// CountTokens is the length of the token sequence Embed feeds the encoder for text.
+func (e *StaticEmbedder) CountTokens(text string) int {
+	return len(e.bpe.Encode(nil, text))
+}
+
 func (e *StaticEmbedder) Close() error { return nil }
 
 func (e *StaticEmbedder) Embed(ctx *context.Context, texts []string, dst []float32) error {

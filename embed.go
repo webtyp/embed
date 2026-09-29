@@ -23,6 +23,10 @@ type Embedder interface {
 	// The caller owns dst, so batching allocates once.
 	Embed(ctx *context.Context, texts []string, dst []float32) error
 
+	// CountTokens returns how many tokens text becomes when this model reads it, including
+	// any special tokens the model adds. Embed of a text reads exactly this many tokens.
+	CountTokens(text string) int
+
 	Close() error
 }
 
@@ -97,6 +101,23 @@ func (m *MockEmbedder) Embed(ctx *context.Context, texts []string, dst []float32
 	}
 
 	return nil
+}
+
+// CountTokens counts space-separated words: deterministic and dependency-free, like the
+// rest of the mock. It is not any real model's count.
+func (m *MockEmbedder) CountTokens(text string) int {
+	count := 0
+	inWord := false
+	for i := 0; i < len(text); i++ {
+		ch := text[i]
+		if ch == ' ' || ch == '\t' || ch == '\n' || ch == '\r' {
+			inWord = false
+		} else if !inWord {
+			inWord = true
+			count++
+		}
+	}
+	return count
 }
 
 // Close is a no-op for MockEmbedder.
