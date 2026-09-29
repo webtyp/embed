@@ -2,7 +2,7 @@
 
 Constraints for agents working on this library. **Read this before any change.**
 The current work order is [docs/PLAN.md](docs/PLAN.md); the master index is
-[`agent/docs/MASTER_PLAN.md`](https://github.com/webtyp/agent/blob/main/docs/MASTER_PLAN.md).
+[`retrieval/docs/SEMANTIC_SEARCH_MASTER_PLAN.md`](https://github.com/webtyp/retrieval/blob/main/docs/SEMANTIC_SEARCH_MASTER_PLAN.md).
 
 ---
 
@@ -15,7 +15,7 @@ for exactly one model, `bekko-embedding-v1-a8m` — it implements none of the th
 
 **Its primary runtime is a browser tab compiled with TinyGo.** The host (`go test`) is a
 development convenience — `Embed` runs in-process inside `webtyp/vectordb`'s call path, in
-the browser, once per query and once per document chunk (≤256 tokens, `MASTER_PLAN.md` D4c).
+the browser, once per query and once per document chunk (≤256 tokens, `SEMANTIC_SEARCH_MASTER_PLAN.md` D4c).
 
 ---
 
@@ -31,7 +31,7 @@ the browser, once per query and once per document chunk (≤256 tokens, `MASTER_
 
 `StaticEmbedder` never imports `webtyp.com/fetch` or decides where the artifact bytes come
 from — `Config.ArtifactBytes`/`MergesBytes` are injected already-fetched. Downloading and
-IndexedDB caching (`MASTER_PLAN.md` D5) are the caller's job, not this adapter's.
+IndexedDB caching (`SEMANTIC_SEARCH_MASTER_PLAN.md` D5) are the caller's job, not this adapter's.
 
 ---
 
