@@ -125,3 +125,32 @@ func TestMockEmbedder_IDAndDimAndClose(t *testing.T) {
 		t.Errorf("Close() error = %v, want nil", err)
 	}
 }
+
+func TestMockEmbedder_CountTokens(t *testing.T) {
+	m := embed.NewMockEmbedder(128)
+
+	cases := []struct {
+		input string
+		want  int
+	}{
+		{"", 0},
+		{"hola", 1},
+		{"  hola   mundo \n", 2},
+		{"one\ttwo\rthree\nfour  five ", 5},
+	}
+
+	for _, c := range cases {
+		got := m.CountTokens(c.input)
+		if got != c.want {
+			t.Errorf("CountTokens(%q) = %d, want %d", c.input, got, c.want)
+		}
+	}
+}
+
+type tokenCounter interface {
+	CountTokens(string) int
+}
+
+func TestEmbedder_SatisfiesTokenCounterShape(t *testing.T) {
+	var _ tokenCounter = embed.Embedder(nil)
+}
